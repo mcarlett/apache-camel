@@ -112,6 +112,7 @@
                                 <configuration>
                                     <target>
                                         <mkdir dir="target/tmp-repo"/>
+                                        <mkdir dir="target/data"/>
                                     </target>
                                 </configuration>
                                 <goals>
