@@ -279,9 +279,19 @@ class ExportQuarkus extends Export {
         super.copyDockerFiles(buildDir);
         Path docker = Path.of(buildDir).resolve("src/main/docker");
         Files.createDirectories(docker);
-        // copy files
-        InputStream is = ExportQuarkus.class.getClassLoader().getResourceAsStream("quarkus-docker/Dockerfile.native");
-        PathUtils.copyFromStream(is, docker.resolve("Dockerfile.native"), true);
+        // copy all Dockerfile variants
+        List<String> dockerfiles = List.of(
+                "Dockerfile.jvm",
+                "Dockerfile.legacy-jar",
+                "Dockerfile.native",
+                "Dockerfile.native-micro"
+        );
+        for (String dockerfile : dockerfiles) {
+            InputStream is = ExportQuarkus.class.getClassLoader().getResourceAsStream("quarkus-docker/" + dockerfile);
+            if (is != null) {
+                PathUtils.copyFromStream(is, docker.resolve(dockerfile), true);
+            }
+        }
     }
 
     @Override
