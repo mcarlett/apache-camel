@@ -363,7 +363,8 @@ public interface ComponentsBuilderFactory {
     }
     /**
      * AWS Eventbridge (camel-aws2-eventbridge)
-     * Send events to AWS Eventbridge cluster instances.
+     * Manage AWS EventBridge cluster instances and consume events via
+     * SQS-backed polling.
      * 
      * Category: cloud,management
      * Since: 3.6
@@ -1521,6 +1522,20 @@ public interface ComponentsBuilderFactory {
         return ElasticsearchRestClientComponentBuilderFactory.elasticsearchRestClient();
     }
     /**
+     * Event (camel-event)
+     * Subscribe to Camel internal events such as route started/stopped and
+     * exchange completed/failed.
+     * 
+     * Category: core,monitoring
+     * Since: 4.19
+     * Maven coordinates: org.apache.camel:camel-event
+     * 
+     * @return the dsl builder
+     */
+    static EventComponentBuilderFactory.EventComponentBuilder event() {
+        return EventComponentBuilderFactory.event();
+    }
+    /**
      * Exec (camel-exec)
      * Execute commands on the underlying operating system.
      * 
@@ -1890,6 +1905,19 @@ public interface ComponentsBuilderFactory {
         return GoogleSheetsStreamComponentBuilderFactory.googleSheetsStream();
     }
     /**
+     * Google Cloud Speech To Text (camel-google-speech-to-text)
+     * Transcribe audio to text using Google Cloud Speech-to-Text API
+     * 
+     * Category: cloud,ai
+     * Since: 4.19
+     * Maven coordinates: org.apache.camel:camel-google-speech-to-text
+     * 
+     * @return the dsl builder
+     */
+    static GoogleSpeechToTextComponentBuilderFactory.GoogleSpeechToTextComponentBuilder googleSpeechToText() {
+        return GoogleSpeechToTextComponentBuilderFactory.googleSpeechToText();
+    }
+    /**
      * Google Storage (camel-google-storage)
      * Store and retrieve objects from Google Cloud Storage Service using the
      * google-cloud-storage library.
@@ -1902,6 +1930,19 @@ public interface ComponentsBuilderFactory {
      */
     static GoogleStorageComponentBuilderFactory.GoogleStorageComponentBuilder googleStorage() {
         return GoogleStorageComponentBuilderFactory.googleStorage();
+    }
+    /**
+     * Google Cloud Text To Speech (camel-google-text-to-speech)
+     * Synthesize speech from text using the Google Cloud Text-to-Speech API
+     * 
+     * Category: cloud,ai
+     * Since: 4.19
+     * Maven coordinates: org.apache.camel:camel-google-text-to-speech
+     * 
+     * @return the dsl builder
+     */
+    static GoogleTextToSpeechComponentBuilderFactory.GoogleTextToSpeechComponentBuilder googleTextToSpeech() {
+        return GoogleTextToSpeechComponentBuilderFactory.googleTextToSpeech();
     }
     /**
      * Google Vertex AI (camel-google-vertexai)

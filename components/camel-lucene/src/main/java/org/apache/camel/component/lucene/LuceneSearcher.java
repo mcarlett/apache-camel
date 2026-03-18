@@ -25,14 +25,12 @@ import org.apache.lucene.analysis.Analyzer;
 import org.apache.lucene.document.Document;
 import org.apache.lucene.index.DirectoryReader;
 import org.apache.lucene.index.IndexReader;
-import org.apache.lucene.index.StoredFields;
 import org.apache.lucene.queryparser.classic.ParseException;
 import org.apache.lucene.queryparser.classic.QueryParser;
 import org.apache.lucene.search.IndexSearcher;
 import org.apache.lucene.search.Query;
 import org.apache.lucene.search.ScoreDoc;
-import org.apache.lucene.search.TopDocs;
-import org.apache.lucene.search.TopScoreDocCollectorManager;
+import org.apache.lucene.search.TopScoreDocCollector;
 import org.apache.lucene.store.NIOFSDirectory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -70,9 +68,8 @@ public class LuceneSearcher {
         int numberOfHits = doSearch(searchPhrase, maxNumberOfHits, totalHitsThreshold);
         searchHits.setNumberOfHits(numberOfHits);
 
-        StoredFields storedFields = indexSearcher.getIndexReader().storedFields();
         for (ScoreDoc hit : hits) {
-            Document selectedDocument = storedFields.document(hit.doc);
+            Document selectedDocument = indexSearcher.doc(hit.doc);
             Hit aHit = new Hit();
             if (returnLuceneDocs) {
                 aHit.setDocument(selectedDocument);
@@ -92,10 +89,9 @@ public class LuceneSearcher {
 
         QueryParser parser = new QueryParser("contents", analyzer);
         Query query = parser.parse(searchPhrase);
-        TopScoreDocCollectorManager collectorManager
-                = new TopScoreDocCollectorManager(maxNumberOfHits, totalHitsThreshold);
-        TopDocs topDocs = indexSearcher.search(query, collectorManager);
-        hits = topDocs.scoreDocs;
+        TopScoreDocCollector collector = TopScoreDocCollector.create(maxNumberOfHits, totalHitsThreshold);
+        indexSearcher.search(query, collector);
+        hits = collector.topDocs().scoreDocs;
 
         LOG.trace("*** Search generated {} hits ***", hits.length);
         return hits.length;

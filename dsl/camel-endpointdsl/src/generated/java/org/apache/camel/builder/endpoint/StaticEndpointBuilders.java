@@ -1060,7 +1060,8 @@ public class StaticEndpointBuilders {
     }
     /**
      * AWS Eventbridge (camel-aws2-eventbridge)
-     * Send events to AWS Eventbridge cluster instances.
+     * Manage AWS EventBridge cluster instances and consume events via
+     * SQS-backed polling.
      * 
      * Category: cloud,management
      * Since: 3.6
@@ -1079,7 +1080,8 @@ public class StaticEndpointBuilders {
     }
     /**
      * AWS Eventbridge (camel-aws2-eventbridge)
-     * Send events to AWS Eventbridge cluster instances.
+     * Manage AWS EventBridge cluster instances and consume events via
+     * SQS-backed polling.
      * 
      * Category: cloud,management
      * Since: 3.6
@@ -4862,6 +4864,52 @@ public class StaticEndpointBuilders {
         return ElasticsearchRestClientEndpointBuilderFactory.endpointBuilder(componentName, path);
     }
     /**
+     * Event (camel-event)
+     * Subscribe to Camel internal events such as route started/stopped and
+     * exchange completed/failed.
+     * 
+     * Category: core,monitoring
+     * Since: 4.19
+     * Maven coordinates: org.apache.camel:camel-event
+     * 
+     * Syntax: <code>event:events</code>
+     * 
+     * Path parameter: events (required)
+     * Comma-separated list of event types to subscribe to. Event types
+     * correspond to CamelEvent.Type enum values (case-insensitive), for
+     * example: RouteStarted, RouteStopped, ExchangeCompleted, ExchangeFailed.
+     * 
+     * @param path events
+     * @return the dsl builder
+     */
+    public static EventEndpointBuilderFactory.EventEndpointBuilder event(String path) {
+        return event("event", path);
+    }
+    /**
+     * Event (camel-event)
+     * Subscribe to Camel internal events such as route started/stopped and
+     * exchange completed/failed.
+     * 
+     * Category: core,monitoring
+     * Since: 4.19
+     * Maven coordinates: org.apache.camel:camel-event
+     * 
+     * Syntax: <code>event:events</code>
+     * 
+     * Path parameter: events (required)
+     * Comma-separated list of event types to subscribe to. Event types
+     * correspond to CamelEvent.Type enum values (case-insensitive), for
+     * example: RouteStarted, RouteStopped, ExchangeCompleted, ExchangeFailed.
+     * 
+     * @param componentName to use a custom component name for the endpoint
+     * instead of the default name
+     * @param path events
+     * @return the dsl builder
+     */
+    public static EventEndpointBuilderFactory.EventEndpointBuilder event(String componentName, String path) {
+        return EventEndpointBuilderFactory.endpointBuilder(componentName, path);
+    }
+    /**
      * Exec (camel-exec)
      * Execute commands on the underlying operating system.
      * 
@@ -6190,6 +6238,46 @@ public class StaticEndpointBuilders {
         return GoogleSheetsStreamEndpointBuilderFactory.endpointBuilder(componentName, path);
     }
     /**
+     * Google Cloud Speech To Text (camel-google-speech-to-text)
+     * Transcribe audio to text using Google Cloud Speech-to-Text API
+     * 
+     * Category: cloud,ai
+     * Since: 4.19
+     * Maven coordinates: org.apache.camel:camel-google-speech-to-text
+     * 
+     * Syntax: <code>google-speech-to-text:operation</code>
+     * 
+     * Path parameter: operation (required)
+     * The operation name
+     * 
+     * @param path operation
+     * @return the dsl builder
+     */
+    public static GoogleCloudSpeechToTextEndpointBuilderFactory.GoogleCloudSpeechToTextEndpointBuilder googleSpeechToText(String path) {
+        return googleSpeechToText("google-speech-to-text", path);
+    }
+    /**
+     * Google Cloud Speech To Text (camel-google-speech-to-text)
+     * Transcribe audio to text using Google Cloud Speech-to-Text API
+     * 
+     * Category: cloud,ai
+     * Since: 4.19
+     * Maven coordinates: org.apache.camel:camel-google-speech-to-text
+     * 
+     * Syntax: <code>google-speech-to-text:operation</code>
+     * 
+     * Path parameter: operation (required)
+     * The operation name
+     * 
+     * @param componentName to use a custom component name for the endpoint
+     * instead of the default name
+     * @param path operation
+     * @return the dsl builder
+     */
+    public static GoogleCloudSpeechToTextEndpointBuilderFactory.GoogleCloudSpeechToTextEndpointBuilder googleSpeechToText(String componentName, String path) {
+        return GoogleCloudSpeechToTextEndpointBuilderFactory.endpointBuilder(componentName, path);
+    }
+    /**
      * Google Storage (camel-google-storage)
      * Store and retrieve objects from Google Cloud Storage Service using the
      * google-cloud-storage library.
@@ -6230,6 +6318,46 @@ public class StaticEndpointBuilders {
      */
     public static GoogleCloudStorageEndpointBuilderFactory.GoogleCloudStorageEndpointBuilder googleStorage(String componentName, String path) {
         return GoogleCloudStorageEndpointBuilderFactory.endpointBuilder(componentName, path);
+    }
+    /**
+     * Google Cloud Text To Speech (camel-google-text-to-speech)
+     * Synthesize speech from text using the Google Cloud Text-to-Speech API
+     * 
+     * Category: cloud,ai
+     * Since: 4.19
+     * Maven coordinates: org.apache.camel:camel-google-text-to-speech
+     * 
+     * Syntax: <code>google-text-to-speech:operation</code>
+     * 
+     * Path parameter: operation (required)
+     * The operation name
+     * 
+     * @param path operation
+     * @return the dsl builder
+     */
+    public static GoogleCloudTextToSpeechEndpointBuilderFactory.GoogleCloudTextToSpeechEndpointBuilder googleTextToSpeech(String path) {
+        return googleTextToSpeech("google-text-to-speech", path);
+    }
+    /**
+     * Google Cloud Text To Speech (camel-google-text-to-speech)
+     * Synthesize speech from text using the Google Cloud Text-to-Speech API
+     * 
+     * Category: cloud,ai
+     * Since: 4.19
+     * Maven coordinates: org.apache.camel:camel-google-text-to-speech
+     * 
+     * Syntax: <code>google-text-to-speech:operation</code>
+     * 
+     * Path parameter: operation (required)
+     * The operation name
+     * 
+     * @param componentName to use a custom component name for the endpoint
+     * instead of the default name
+     * @param path operation
+     * @return the dsl builder
+     */
+    public static GoogleCloudTextToSpeechEndpointBuilderFactory.GoogleCloudTextToSpeechEndpointBuilder googleTextToSpeech(String componentName, String path) {
+        return GoogleCloudTextToSpeechEndpointBuilderFactory.endpointBuilder(componentName, path);
     }
     /**
      * Google Vertex AI (camel-google-vertexai)
