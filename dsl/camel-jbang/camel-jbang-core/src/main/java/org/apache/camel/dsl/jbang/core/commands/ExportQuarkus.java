@@ -276,17 +276,20 @@ class ExportQuarkus extends Export {
 
     @Override
     protected void copyDockerFiles(String buildDir) throws Exception {
-        super.copyDockerFiles(buildDir);
         Path docker = Path.of(buildDir).resolve("src/main/docker");
         Files.createDirectories(docker);
-        // copy all Dockerfile variants
-        List<String> dockerfiles = List.of(
-                "Dockerfile.jvm",
+        // Use the Quarkus JVM Dockerfile as the main Dockerfile (the generic template
+        // does not work for Quarkus because it expects a fat jar).
+        InputStream jvm = ExportQuarkus.class.getClassLoader().getResourceAsStream("quarkus-docker/Dockerfile.jvm");
+        if (jvm != null) {
+            PathUtils.copyFromStream(jvm, docker.resolve("Dockerfile"), true);
+        }
+        // Copy additional Dockerfile variants for alternative Quarkus packaging modes
+        List<String> extras = List.of(
                 "Dockerfile.legacy-jar",
                 "Dockerfile.native",
-                "Dockerfile.native-micro"
-        );
-        for (String dockerfile : dockerfiles) {
+                "Dockerfile.native-micro");
+        for (String dockerfile : extras) {
             InputStream is = ExportQuarkus.class.getClassLoader().getResourceAsStream("quarkus-docker/" + dockerfile);
             if (is != null) {
                 PathUtils.copyFromStream(is, docker.resolve(dockerfile), true);
