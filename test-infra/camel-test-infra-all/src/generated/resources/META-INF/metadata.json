@@ -247,7 +247,7 @@
   "groupId" : "org.apache.camel",
   "artifactId" : "camel-test-infra-hivemq",
   "version" : "4.21.0-SNAPSHOT",
-  "serviceVersion" : "2025.5"
+  "serviceVersion" : "2026.5"
 }, {
   "service" : "org.apache.camel.test.infra.ibmmq.services.IbmMQInfraService",
   "description" : "IBM MQ is enterprise messaging middleware for reliable communication",
