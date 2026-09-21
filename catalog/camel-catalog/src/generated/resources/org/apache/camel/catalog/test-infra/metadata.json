@@ -227,7 +227,7 @@
   "groupId" : "org.apache.camel",
   "artifactId" : "camel-test-infra-couchdb",
   "version" : "4.21.0-SNAPSHOT",
-  "serviceVersion" : "3.5.1"
+  "serviceVersion" : "3.5.2"
 }, {
   "service" : "org.apache.camel.test.infra.keycloak.services.KeycloakInfraService",
   "description" : "Keycloak is an open source identity and access management solution",
