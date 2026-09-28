@@ -147,7 +147,7 @@
   "groupId" : "org.apache.camel",
   "artifactId" : "camel-test-infra-postgres",
   "version" : "4.21.0-SNAPSHOT",
-  "serviceVersion" : "17.10-alpine"
+  "serviceVersion" : "17.11-alpine"
 }, {
   "service" : "org.apache.camel.test.infra.kafka.services.KafkaInfraService",
   "description" : "Apache Kafka, Distributed event streaming platform",
